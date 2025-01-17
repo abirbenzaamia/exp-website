@@ -5,6 +5,7 @@ import pool from "./src/config/db.js";
 
 import participantRoutes from './src/routes/participantRoutes.js'
 import errorHandling from "./src/middlewares/errorHandler.js";
+import createParticipantTable from "./src/data/createParticipantTable.js";
 
 dotenv.config();
 
@@ -18,11 +19,14 @@ app.use("/api", participantRoutes)
 // Error handling middleware
 app.use(errorHandling)
 
+
+//Create table before starting server
+createParticipantTable();
+
+
 // Middlewares
 app.use(express.json());
 app.use(cors());
-
-// Routes
 
 
 // Testing POSTGRES Connection

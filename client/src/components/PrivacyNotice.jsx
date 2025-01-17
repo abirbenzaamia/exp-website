@@ -67,8 +67,8 @@ const PrivacyNotice = () => {
             </div>
 
             <h2 className="text-left font-bold"> Data Collection </h2>
-            <div class="flex justify-center items-center text-center">
-  <ul class="list-disc list-inside text-left">
+            <div className="flex justify-center items-center text-center">
+  <ul className="list-disc list-inside text-left">
     <li ><strong>Internet Protocol address (IP address)</strong></li>
     <li> <strong>Device Data.</strong> We collect device data such as information about your computer, phone, tablet, or other device you use to access the study form. Depending on the device used, this device data may include information such as browser type, hardware model, operating system, and system configuration information.</li>
     <li> <strong>Location Data.</strong> We collect location data such as information about your device's location, which can be either precise or imprecise. For this purpose, we use technologies to collect geolocation data that tells us your approximate location based on your IP address.</li>
@@ -86,13 +86,12 @@ const PrivacyNotice = () => {
 
             <h2 className="text-left font-bold"> Data records </h2>
             <div className="text-gray-700 mb-4">
-            <p>We protect your personal information through a system of technical security measures: 
+            <p>We protect your personal information through a system of technical security measures: </p>
                   <ul> 
                     <li>We make use of our institution's organizational and technical processes and procedures to safely store and protect your personal information. Your data is stored safely on INRIA's infrastructure (one of our research institution) with <strong>restricted access</strong>: only our research team will have access to view, delete and modify your data. </li>
                     <li>The data we store is hashed with a <em>one way salted hash function</em> and no copy of the data will be stored elsewhere.</li>
                     <li>During the time we administer our experiment, we make sure to keep the website regularly maintained and secured. </li>
                   </ul>
-                </p>
             </div>
 
 
