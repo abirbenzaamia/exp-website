@@ -7,11 +7,11 @@ export const detectDevice = () => {
   const userAgent = navigator.userAgent;
 
   if (/Mobi|Android/i.test(userAgent)) {
-    return "Mobile";
+    return false;
   } else if (/iPad|Tablet/i.test(userAgent)) {
-    return "Tablet";
+    return false;
   } else {
-    return "Desktop";
+    return true;
   }
 
   }
@@ -24,17 +24,17 @@ export const detectBrowser= () =>{
     const userAgent = navigator.userAgent;
 
     if (/chrome|chromium|crios/i.test(userAgent) && !/edge|edg/i.test(userAgent)) {
-      return "chrome";
+      return true;
     } else if (/safari/i.test(userAgent) && !/chrome|chromium|crios/i.test(userAgent)) {
-        return "safari";
+        return false;
     } else if (/firefox|fxios/i.test(userAgent)) {
-        return "firefox";
+        return false;
     } else if (/edge|edg/i.test(userAgent)) {
-        return "edge";
+        return false;
     } else if (/opera|opr/i.test(userAgent)) {
-        return "opera";
+        return false;
     } else {
-        return 0;
+        return false;
     }
 
 }

@@ -1,36 +1,55 @@
 import React, { useState } from "react";
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
+import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 
 const PrivacyNotice = () => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [open, setOpen] = useState(true)
+  // const [isOpen, setIsOpen] = useState(true);
+  // const [open, setOpen] = useState(true)
+  const [accepted, setAccepted] = useState(false);
+
+  // const handleAccept = () => {
+  //   // Logic for accepting privacy notice
+  //   console.log("Privacy notice accepted.");
+  //   setIsOpen(false);
+  // };
+
+  // const handleDecline = () => {
+  //   // Logic for declining privacy notice
+  //   console.log("Privacy notice declined.");
+  //   setIsOpen(true);
+  // };
   
   const handleAccept = () => {
-    // Logic for accepting privacy notice
-    console.log("Privacy notice accepted.");
-    setIsOpen(false);
+    setAccepted(true); // Grant access to the website
+    localStorage.setItem("privacyAccepted", "true"); // Save consent in local storage
   };
 
   const handleDecline = () => {
-    // Logic for declining privacy notice
-    console.log("Privacy notice declined.");
-    setIsOpen(false);
+    setAccepted(false); // Keep the user blocked
+    alert("You should accept the Privacy Notice to continue the study. Otherwise, kindly exit the survey and return your submission on prolific");
   };
+
+  // Check localStorage for existing consent
+  React.useEffect(() => {
+    const consentGiven = localStorage.getItem("privacyAccepted");
+    if (consentGiven === "true") {
+      setAccepted(true);
+    }
+  }, []);
 
   return (
     <>
-      {isOpen && (
-         <Dialog open={open} onClose={setOpen} className="relative z-10">
+      {!accepted ? (
+         <Dialog open={!accepted} onClose={handleDecline} className="relative z-10">
          <DialogBackdrop
-           transition
+           //transition
            className="fixed inset-0 bg-gray-500/75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
          />
-   
+
          <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
              <DialogPanel
                transition
-               className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-3xl data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
+               className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-4xl data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95"
              >
                <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
             <h2 className="text-xl font-bold mb-4">Privacy Notice</h2>
@@ -40,11 +59,11 @@ const PrivacyNotice = () => {
             <p className="font-medium ">If you choose to participate in this study, you consent to the following privacy notice.</p>
            
                 <p>
-                We will collect the answers you provide in this form, in addition to your IP address, Prolific ID, and browser information (such as the use of ad-blocking software, browser type, and platform). 
+                We will collect the answers you provide in this form, in addition to your IP address, Prolific ID, and browser information (such as the use of ad-blocking software, browser type, and platform) and survey repsponses.
                 This data is exclusively collected and utilized for the purposes of our study and will be deleted after the study's completion. 
                 </p>
               
-              <p> If you chose to participate in this study, you may be retargedted with Ads.</p>
+              <p> By choosing to participate in this study, you will be required to disable any ad-blocking extensions on your browser. Additionally, you may be shown retargeted advertisements as part of the study experience.</p>
               
               <p> You have the right to request the deletion and modification of the data we collect, by contacting us on Prolific, or on our <a className="text-blue-600 underline hover:text-blue-800" href="mailto:capi-survey@inria.fr">email address.</a>  </p>
               <p>The data controller is Gilles Schaeffer, director of the the Ecole Polytechnique Computer Science Laboratory (LIX), bâtiment Alan turiing, 1 rue honore d'Estienne d'Orves, 91120 PALAISEAU – FRANCE </p>
@@ -67,19 +86,19 @@ const PrivacyNotice = () => {
             </div>
 
             <h2 className="text-left font-bold"> Data Collection </h2>
-            <div className="flex justify-center items-center text-center">
+            <div className="flex justify-center items-center text-center text-gray-700 mb-4">
   <ul className="list-disc list-inside text-left">
     <li ><strong>Internet Protocol address (IP address)</strong></li>
     <li> <strong>Device Data.</strong> We collect device data such as information about your computer, phone, tablet, or other device you use to access the study form. Depending on the device used, this device data may include information such as browser type, hardware model, operating system, and system configuration information.</li>
     <li> <strong>Location Data.</strong> We collect location data such as information about your device's location, which can be either precise or imprecise. For this purpose, we use technologies to collect geolocation data that tells us your approximate location based on your IP address.</li>
-    </ul>
+    <li ><strong>Survey response</strong> we will collect your responses to the survey. The data collected may include demographic information such as age, gender and education level, links of ads you receive and your feedback.   </li>
+      </ul>
     </div>
         
 
     <h2 className="text-left font-bold"> Data processsing </h2>
             <div className="text-gray-700 mb-4">
-            <p> We process your information with your consent to <strong>deliver targeted advertising</strong> on your social media accounts: Facebook or Instagram, during the duration of our experiment. If you choose to participate, you will be signed up to a single ad campaign and may receive a generic ad one or more times if you have been successfully retargeted. This requires us to share your information with Meta’s advertising platform. Meta uses this information to create <a className="text-blue-600 underline hover:text-blue-800" href="https://www.facebook.com/business/help/744354708981227?id=2469097953376494">Custom audiences</a> and target them with an ad campaign. The data we collect is also used to establish some statistics (e.g., virtual private networks VPN or proxy use, ad block use, etc.) </p>
-
+            <p> The data collected from your participation will be processed solely for statistical purposes (e.g., your perceptions towards advertisements, demographics, virtual private networks VPN or proxy use, ad block use, etc.). Your data will be aggregated and analyzed to identify trends, patterns, and insights. </p>
             </div>
 
 
@@ -93,18 +112,6 @@ const PrivacyNotice = () => {
                     <li>During the time we administer our experiment, we make sure to keep the website regularly maintained and secured. </li>
                   </ul>
             </div>
-
-
-
-            <h2 className="text-left font-bold"> Transferring data outside the European Union </h2>
-            <div className="text-gray-700 mb-4">
-            <p>Depending on their respective needs, the following recipients will receive the data we collect: <a href="https://www.facebook.com/legal/terms_preview">Meta (ex. Facebook) </a> and <a href="https://policies.google.com/terms?hl=en-US">Google.</a></p>
-        
-                <p>In the event of a transfer of your data outside of the EU, <a href="https://www.facebook.com/legal/terms/data_security_terms">Meta's Data Security Terms</a>  also apply for processing the data we send through Meta's tracking tools. As well as <a href="https://policies.google.com/privacy/frameworks?hl=en-US">Google's Privacy Policy</a> for the data we send through Google's tracking tools. The services provided by these third parties are beyond our control and may, at any time, modify the terms of use of their services.</p>
-                <p> Your data is only transmitted if you have given us your consent. </p>
-      
-            </div>
-
 
 
             <h2 className="text-left font-bold"> Data retention period </h2>
@@ -143,7 +150,7 @@ const PrivacyNotice = () => {
                 <p> Cookies are small pieces of text sent to your browser by a website you visit. They help that website remember information about your visit, which can both make it easier to visit the site again and make the site more useful to you.</p>
         
                 <em> Third-party cookies </em>
-                <p> With participant's consent, we use <a href="https://www.facebook.com/legal/terms_preview">Meta</a>'s third-party cookies for retargeting purposes, specifically if the participant has a Facebook account (this includes Instagram and Messenger too).  </p>
+                <p> With participant's consent, we will ask you to accept all cookies in webistes you will be redirected to.   </p>
       
                 <em> Delete browser cookies </em>
                 <p> You can delete all cookies already stored on your device by clearing the browsing history of your browser. This will remove all cookies from the sites you have visited.
@@ -159,7 +166,7 @@ const PrivacyNotice = () => {
             <div className="flex justify-end space-x-4">
               <button
                 onClick={handleDecline}
-                className="px-4 py-2 text-sm font-semibold text-red-600 border border-red-600 rounded hover:bg-red-50"
+                className="px-4 py-2 text-sm font-semibold text-white bg-red-600 rounded hover:bg-blue-700"
               >
                 Decline
               </button>
@@ -174,10 +181,14 @@ const PrivacyNotice = () => {
           </DialogPanel>
         </div>
       </div>
-    </Dialog>
-    
+    </Dialog>  ) : (
+        <div>
+          {/* Main website content */}
+          <h1>Welcome to the Website!</h1>
+          <p>Enjoy browsing our content.</p>
+        </div>
       )}
-    </>
+    </> 
   );
 };
 
