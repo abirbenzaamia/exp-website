@@ -12,9 +12,9 @@ return (
 
           <h2 className="text-base/7 mt-5 font-semibold text-gray-900">Stage 1</h2>
           <p className="mt-1 text-sm/6 text-gray-600">
-            In this section you will be required to activate The <a className="ext-blue-600 underline hover:text-blue-800" href="https://privacysandbox.com/intl/en_us/"> Google's Privacy Sandbox. </a> <br />
-            <strong>1. </strong>Please go to: <a className="ext-blue-600 underline hover:text-blue-800" href="chrome://flags/#test-third-party-cookie-phaseout">this link</a> to activate it and choose <strong>Enabled.</strong> <br />
-            <strong>2. </strong>Please go to: <a className="ext-blue-600 underline hover:text-blue-800" href="chrome://flags/#tpc-phase-out-facilitated-testing">this link</a> to activate it and choose <strong>Enabled Force Treatment.</strong>
+            In this section you will be required to activate third-party tracking cookies <br />
+            <strong>1. </strong>Please go to: <a className="ext-blue-600 underline hover:text-blue-800" href="chrome://flags/#test-third-party-cookie-phaseout">this link</a> to desactivate it and choose <strong>Disabled.</strong> <br />
+            <strong>2. </strong>Please go to: <a href="chrome://flags/#tpc-phase-out-facilitated-testing">this link</a> to activate it and choose <strong>Enabled Force Control 1.</strong>
           </p>
 
 
