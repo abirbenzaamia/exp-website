@@ -183,9 +183,7 @@ const PrivacyNotice = () => {
       </div>
     </Dialog>  ) : (
         <div>
-          {/* Main website content */}
-          <h1>Welcome to the Website!</h1>
-          <p>Enjoy browsing our content.</p>
+          
         </div>
       )}
     </> 

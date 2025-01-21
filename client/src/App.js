@@ -1,21 +1,25 @@
 import './App.css';
 import PrivacyNotice from './components/PrivacyNotice';
+import Stage1Form from './components/Stage1Form';
 import StartForm from './components/StartForm';
-import AdBlockDetector from './utils/adBlockAlert';
+import AdBlockDetector from './utils/AdBlockAlert';
 import BrowserTypeDetector from './utils/BrowserAlert';
 import DeviceDetector from './utils/DeviceAlert'
+
+
 
 
 function App() {
   return (
     <div className="App">
+      <div className="min-h-screen bg-gray-50 items-center justify-center p-20 text-center ">
       <AdBlockDetector/>
       <BrowserTypeDetector/>
       <DeviceDetector/>
-      
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center ">
+
       <PrivacyNotice/>
       <StartForm/>
+      <Stage1Form/>
       </div>
     </div>
   );

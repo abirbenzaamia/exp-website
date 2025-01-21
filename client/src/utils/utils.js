@@ -69,3 +69,14 @@ export const detectAdBlock = async () => {
 // Collect IP Adress 
 
 
+// Set Cookie 
+
+function setCookie(name, value, days) {
+  const date = new Date();
+  date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); // Days to milliseconds
+  const expires = "expires=" + date.toUTCString();
+  document.cookie = `${name}=${value}; ${expires}; path=/`;
+}
+
+// Example usage:
+setCookie('OPT_OUT', '1', 7); // Sets a cookie named 'username' with value 'JohnDoe' that expires in 7 days
