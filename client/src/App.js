@@ -2,10 +2,9 @@ import './App.css';
 import PrivacyNotice from './components/PrivacyNotice';
 import Stage1Form from './components/Stage1Form';
 import StartForm from './components/StartForm';
-import AdBlockDetector from './utils/AdBlockAlert';
 import BrowserTypeDetector from './utils/BrowserAlert';
 import DeviceDetector from './utils/DeviceAlert'
-
+import AdBlockDetector from './utils/AdBlockAlert'
 
 
 
