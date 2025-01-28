@@ -1,11 +1,13 @@
 
 import React, { useState } from 'react';
 
-const Survey = () => {
+const Survey = ({data}) => {
   const [adRelevance, setAdRelevance] = useState(0);
   const [visitedBefore, setVisitedBefore] = useState(false);
   const [privacyConcern, setPrivacyConcern] = useState(false);
   const [purchaseIntent, setPurchaseIntent] = useState(false);
+
+console.log(data)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,16 +23,15 @@ const Survey = () => {
 
   return (
     <div className="max-w-2xl m-5 p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
-      <form onSubmit={handleSubmit}>
         {/* Ad Relevance Question */}
         <div className="mb-5">
-          <h2 className="text-base/7 font-semibold text-gray-900">Website 1</h2>
+          <h2 className="text-base/7 font-semibold text-gray-900">Website {data.step+1}</h2>
           <p className="mt-1 text-sm/6 text-gray-600">
-           <strong>1.</strong> Vistite this website: <a className="ext-blue-600 underline hover:text-blue-800" href="chrome://flags/#tpc-phase-out-facilitated-testing">Le monde</a> <br /> 
+           <strong>1.</strong> Vistite this website: <a className="ext-blue-600 underline hover:text-blue-800" href={data.url} target='_blank' rel="noreferrer">website link</a> <br /> 
            <strong>2.</strong> Copy here the link of the first ad you see by right click then copy link adress</p>
           
           <div className="mt-5 max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-
+            
             <div className="sm:col-span-4">
               <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                 Ad Link
@@ -41,6 +42,7 @@ const Survey = () => {
                   name="ad2"
                   type="url"
                   autoComplete="url"
+                  required
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -55,6 +57,7 @@ const Survey = () => {
           <div className="flex space-x-2">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((rating) => (
               <button
+              required
                 key={rating}
                 type="button"
                 className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${
@@ -80,9 +83,9 @@ const Survey = () => {
               <input
                 type="radio"
                 name="visitedBefore"
-                checked={visitedBefore}
                 onChange={() => setVisitedBefore(true)}
                 className="mr-2"
+                required
               />
               Yes
             </label>
@@ -90,7 +93,6 @@ const Survey = () => {
               <input
                 type="radio"
                 name="visitedBefore"
-                checked={!visitedBefore}
                 onChange={() => setVisitedBefore(false)}
                 className="mr-2"
               />
@@ -109,9 +111,9 @@ const Survey = () => {
               <input
                 type="radio"
                 name="purchaseIntent"
-                checked={purchaseIntent}
                 onChange={() => setPurchaseIntent(true)}
                 className="mr-2"
+                required
               />
               Yes
             </label>
@@ -119,7 +121,6 @@ const Survey = () => {
               <input
                 type="radio"
                 name="purchaseIntent"
-                checked={!purchaseIntent}
                 onChange={() => setPurchaseIntent(false)}
                 className="mr-2"
               />
@@ -138,9 +139,9 @@ const Survey = () => {
               <input
                 type="radio"
                 name="privacyConcern"
-                checked={privacyConcern}
                 onChange={() => setPrivacyConcern(true)}
                 className="mr-2"
+                required
               />
               Yes
             </label>
@@ -148,7 +149,6 @@ const Survey = () => {
               <input
                 type="radio"
                 name="privacyConcern"
-                checked={!privacyConcern}
                 onChange={() => setPrivacyConcern(false)}
                 className="mr-2"
               />
@@ -159,13 +159,13 @@ const Survey = () => {
 
 
         {/* Submit Button */}
-        <button
+        {/* <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
         >
           Submit
-        </button>
-      </form>
+        </button> */}
+        
     </div>
   );
 };

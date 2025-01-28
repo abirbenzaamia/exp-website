@@ -1,6 +1,7 @@
 import express from "express";
 import {createParticipant, getAllParticipants, getParticipantById, updateParticipant, deleteParticipant}  from "../controllers/participantController.js"
 
+
 const router = express.Router();
 
 router.post("/participant", createParticipant);
