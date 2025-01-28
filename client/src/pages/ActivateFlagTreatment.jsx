@@ -6,22 +6,67 @@ export default function ActivateFlagTreatment() {
 
 // The stage one is dedicated for surevey repsonse for the Treatment group : Privacy Sandbox
  const handleSubmit = async e => {
-        
-      try{
-        setCookie("OPT_OUT", 1, 7)
+  const cookieString = document.cookie;
+    const cookies = cookieString.split("; ");
+    for (const cookie of cookies) {
+      const [key, value] = cookie.split("=");
+      if (key === '_fbp') {
+        console.log('cookie _fbp found')
+      }else{
+        console.log('cookie _fbp not found')
       }
-      catch{
-        alert('You did not activate the flag as mentioned')
-      }
+    }
+//       try{
+//         setCookie("OPT_OUT", 1, 7)
+//       }
+//       catch{
+//         alert('You did not activate the flag as mentioned')
+//       }
 
-      // Example usage
-const userSession = getCookie('OPT_OUT');
-if (userSession) {
-  console.log(`Session ID: ${userSession}`);
-} else {
-  console.log('Session cookie not found');
-}
-      
+//       // Example usage
+// const userSession = getCookie('OPT_OUT');
+// if (userSession) {
+//   console.log(`Session ID: ${userSession}`);
+// } else {
+//   console.log('Session cookie not found');
+// }
+
+
+// fetch("https://connect.facebook.net/en_US/fbevents.js", {
+//   method: "GET",
+//   mode: "no-cors", // Ensure cookies are sent and accessible
+// })
+//   .then((response) => {
+//     console.log("Resource loaded successfully.");
+//     checkCookies();
+//   })
+//   .catch(() => {
+//     console.log("Failed to load the resource.");
+//   });
+
+// function checkCookies() {
+//   const fbCookie = getCookie("_fbp"); // Example Facebook cookie name
+//   if (fbCookie) {
+//     console.log("Facebook cookie detected:", fbCookie);
+//   } else {
+//     console.log("Facebook cookie not found.");
+//   }
+// }
+
+// function getCookie(name) {
+//   const cookieString = document.cookie;
+//   const cookies = cookieString.split("; ");
+//   for (const cookie of cookies) {
+//     const [key, value] = cookie.split("=");
+//     if (key === name) {
+//       return decodeURIComponent(value);
+//     }
+//   }
+//   return null;
+// }
+
+
+
       };
 
 return (
