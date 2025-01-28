@@ -1,51 +1,45 @@
 
+import { useEffect } from "react";
+
+
 import {setCookie, getCookie} from '../utils/utils'
 
 
 export default function ActivateFlagTreatment() {
-
+  const GA_TRACKING_ID = "G-BW73V2KYB5";
 
   
+  // useEffect(() => {
+  //   // Load the gtag script
+  //   const CookieDetect = async () => {
+  //     // Detect ad blocker using a bait URL
+  //  fetch("https://connect.facebook.net/en_US/fbevents.js", {
+  //    method: "POST",
+  //    mode: "no-cors",
+  //  })
+  //    .then(() => {
+  //      console.log("Resource loaded successfully. No ad blocker detected.");
+     
+  //    })
+  //    .catch(() => {
+  //      console.log("Ad blocker detected.");
+  //    // Disable all input fields
+  //    const inputs = document.querySelectorAll("input");
+  //    inputs.forEach((input) => {
+  //        input.setAttribute("disabled", "");
+  //    });
+  //    });
+  //  };
 
+  //  CookieDetect();
+  // }, []);
 
 // The stage one is dedicated for surevey repsonse for the Treatment group : Privacy Sandbox
  const handleSubmit = async e => {
   // const cookieString = document.cookie;
   //   const cookies = cookieString.split("; ");
-  //   for (const cookie of cookies) {
-  //     const [key, value] = cookie.split("=");
-  //     if (key === '_fbp') {
-  //       console.log('cookie _fbp found')
-  //     }else{
-  //       console.log('cookie _fbp not found')
-  //     }
-  //   }
-// Check if the _fbp cookie exists; set it if missing
-if (!document.cookie.includes("_fbp=")) {
-  const fbCookieValue = `fb.${Date.now()}.${Math.floor(Math.random() * 10000000000)}`;
-  document.cookie = `_fbp=${fbCookieValue}; path=/; max-age=31536000; SameSite=Lax; Secure`;
-  console.log("First-party _fbp cookie set:", fbCookieValue);
-}
 
-// Load Facebook Pixel script
-// eslint-disable-next-line no-unused-expressions
-!(function (f, b, e, v, n, t, s) {
-  if (f.fbq) return; n = f.fbq = function () {
-    n.callMethod ?
-      n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-  };
-  if (!f._fbq) f._fbq = n;
-  n.push = n; n.loaded = !0; n.version = '2.0';
-  n.queue = []; t = b.createElement(e); t.async = !0;
-  t.src = v; s = b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t, s)
-}(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js'));
-
-// Initialize the Pixel
-window.fbq('init', '322181517178287'); // Replace with your Pixel ID
-window.fbq('track', 'PageView');
-
-
+  
 
       };
 
