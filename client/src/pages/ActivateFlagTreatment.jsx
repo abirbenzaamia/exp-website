@@ -4,66 +4,46 @@ import {setCookie, getCookie} from '../utils/utils'
 
 export default function ActivateFlagTreatment() {
 
+
+  
+
+
 // The stage one is dedicated for surevey repsonse for the Treatment group : Privacy Sandbox
  const handleSubmit = async e => {
-  const cookieString = document.cookie;
-    const cookies = cookieString.split("; ");
-    for (const cookie of cookies) {
-      const [key, value] = cookie.split("=");
-      if (key === '_fbp') {
-        console.log('cookie _fbp found')
-      }else{
-        console.log('cookie _fbp not found')
-      }
-    }
-//       try{
-//         setCookie("OPT_OUT", 1, 7)
-//       }
-//       catch{
-//         alert('You did not activate the flag as mentioned')
-//       }
+  // const cookieString = document.cookie;
+  //   const cookies = cookieString.split("; ");
+  //   for (const cookie of cookies) {
+  //     const [key, value] = cookie.split("=");
+  //     if (key === '_fbp') {
+  //       console.log('cookie _fbp found')
+  //     }else{
+  //       console.log('cookie _fbp not found')
+  //     }
+  //   }
+// Check if the _fbp cookie exists; set it if missing
+if (!document.cookie.includes("_fbp=")) {
+  const fbCookieValue = `fb.${Date.now()}.${Math.floor(Math.random() * 10000000000)}`;
+  document.cookie = `_fbp=${fbCookieValue}; path=/; max-age=31536000; SameSite=Lax; Secure`;
+  console.log("First-party _fbp cookie set:", fbCookieValue);
+}
 
-//       // Example usage
-// const userSession = getCookie('OPT_OUT');
-// if (userSession) {
-//   console.log(`Session ID: ${userSession}`);
-// } else {
-//   console.log('Session cookie not found');
-// }
+// Load Facebook Pixel script
+// eslint-disable-next-line no-unused-expressions
+!(function (f, b, e, v, n, t, s) {
+  if (f.fbq) return; n = f.fbq = function () {
+    n.callMethod ?
+      n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+  };
+  if (!f._fbq) f._fbq = n;
+  n.push = n; n.loaded = !0; n.version = '2.0';
+  n.queue = []; t = b.createElement(e); t.async = !0;
+  t.src = v; s = b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t, s)
+}(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js'));
 
-
-// fetch("https://connect.facebook.net/en_US/fbevents.js", {
-//   method: "GET",
-//   mode: "no-cors", // Ensure cookies are sent and accessible
-// })
-//   .then((response) => {
-//     console.log("Resource loaded successfully.");
-//     checkCookies();
-//   })
-//   .catch(() => {
-//     console.log("Failed to load the resource.");
-//   });
-
-// function checkCookies() {
-//   const fbCookie = getCookie("_fbp"); // Example Facebook cookie name
-//   if (fbCookie) {
-//     console.log("Facebook cookie detected:", fbCookie);
-//   } else {
-//     console.log("Facebook cookie not found.");
-//   }
-// }
-
-// function getCookie(name) {
-//   const cookieString = document.cookie;
-//   const cookies = cookieString.split("; ");
-//   for (const cookie of cookies) {
-//     const [key, value] = cookie.split("=");
-//     if (key === name) {
-//       return decodeURIComponent(value);
-//     }
-//   }
-//   return null;
-// }
+// Initialize the Pixel
+window.fbq('init', '322181517178287'); // Replace with your Pixel ID
+window.fbq('track', 'PageView');
 
 
 
