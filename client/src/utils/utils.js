@@ -71,15 +71,26 @@ export const detectAdBlock = async () => {
 
 // Set Cookie 
 
-function setCookie(name, value, days) {
+export const setCookie = (name, value, days) => {
   const date = new Date();
   date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); // Days to milliseconds
   const expires = "expires=" + date.toUTCString();
   document.cookie = `${name}=${value}; ${expires}; path=/`;
 }
 
-// Example usage:
-setCookie('OPT_OUT', '1', 7); // Sets a cookie named 'username' with value 'JohnDoe' that expires in 7 days
+export const getCookie = (name) =>  {
+  const cookieString = document.cookie; // Get all cookies as a single string
+  const cookies = cookieString.split('; '); // Split cookies by '; '
+
+  for (const cookie of cookies) {
+    const [key, value] = cookie.split('=');
+    if (key === name) {
+      return decodeURIComponent(value);
+    }
+  }
+  return null; // Return null if the cookie doesn't exist
+}
+
 
 //const ipinfo = require("ipinfo");
 
@@ -145,4 +156,12 @@ export const getProlificId = () => {
 
 }
 
+
+
+// Get Prolific IDby name
+
+export const setTestingGroup = (prolific_id, nb_participants) => {
+  
+
+}
 
