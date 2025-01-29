@@ -30,3 +30,8 @@ server/node_modules
 server/.env
 
 third-party-cookies-testing
+
+
+# dependencies
+x-3pc/node_modules
+x-3pc/.env
