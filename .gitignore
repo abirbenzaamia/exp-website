@@ -28,3 +28,5 @@ yarn-error.log*
 # dependencies
 server/node_modules
 server/.env
+
+third-party-cookies-testing
