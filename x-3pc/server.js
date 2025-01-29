@@ -5,8 +5,10 @@ const path = require('path');
 const app = express();
 const PORT = 5001;
 
+
+// Send json file
 app.get('/get-3pc.json', (req, res) => {
-  const filePath = path.join(__dirname, 'get-3pc.json'); // Replace with your JSON file path
+  const filePath = path.join(__dirname, 'get-3pc.json'); 
 
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
@@ -14,10 +16,6 @@ app.get('/get-3pc.json', (req, res) => {
       res.status(500).send('Server Error');
       return;
     }
-
-
-
-    // 
     
     try {
       const jsonData = JSON.parse(data);
