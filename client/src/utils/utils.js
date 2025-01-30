@@ -71,13 +71,13 @@ export const detectAdBlock = async () => {
 
 // Set Cookie 
 
-export const set3pc = () => {
+export const set3pc = async () => {
     // Detect ad blocker using a bait URL
     fetch("https://x-3pc.onrender.com/set-3pc.html", {
       method: "GET",
     })
       .then(res => {
-        console.log(res);
+        //console.log(res);
         return true;
       })
       .catch(err => {
@@ -86,7 +86,7 @@ export const set3pc = () => {
       });
 }
 
-export const get3pc = () =>  {
+export const get3pc = async () =>  {
  // Try setting a cross-site cookie
  fetch('https://x-3pc.onrender.com/get-3pc.json', {
   method: 'GET',
