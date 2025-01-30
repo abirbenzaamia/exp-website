@@ -11,7 +11,8 @@ const PORT = 5001;
 const allowedOrigins = [
   "https://www.greensandbox.fr",
   "http://localhost:62886",
-  "http://localhost:5001"
+  "http://localhost:5001",
+  "http://localhost:3000"
 ];
 
 
@@ -23,6 +24,8 @@ const credentials = (req, res, next) => {
   next();
 };
 
+
+
 const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
@@ -31,7 +34,7 @@ const corsOptions = {
     } else {
       callback(new Error("Not allowed by CORS"));
     }
-    console.log(origin);
+    //console.log(origin);
   },
   optionsSuccessStatus: 200,
 };
@@ -71,7 +74,7 @@ app.get("/set-3pc.json", (req, res) => {
 app.get("/get-3pc.json", (req, res) => {
   //const cookieValue = document.cookie["3pc"];
   const cookies = req.cookies;
-  console.log(cookies)
+  //console.log(cookies)
   const cookieValue = cookies['3pc']
 
   if (cookieValue) {

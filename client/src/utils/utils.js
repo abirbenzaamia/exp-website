@@ -71,24 +71,41 @@ export const detectAdBlock = async () => {
 
 // Set Cookie 
 
-export const setCookie = (name, value, days) => {
-  const date = new Date();
-  date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); // Days to milliseconds
-  const expires = "expires=" + date.toUTCString();
-  document.cookie = `${name}=${value}; ${expires}; path=/`;
+export const set3pc = () => {
+    // Detect ad blocker using a bait URL
+    fetch("https://x-3pc.onrender.com/set-3pc.html", {
+      method: "GET",
+    })
+      .then(res => {
+        console.log(res);
+        return true;
+      })
+      .catch(err => {
+        console.log(err);
+      return false;
+      });
 }
 
-export const getCookie = (name) =>  {
-  const cookieString = document.cookie; // Get all cookies as a single string
-  const cookies = cookieString.split('; '); // Split cookies by '; '
-
-  for (const cookie of cookies) {
-    const [key, value] = cookie.split('=');
-    if (key === name) {
-      return decodeURIComponent(value);
-    }
-  }
-  return null; // Return null if the cookie doesn't exist
+export const get3pc = () =>  {
+ // Try setting a cross-site cookie
+ fetch('https://x-3pc.onrender.com/get-3pc.json', {
+  method: 'GET',
+  credentials: 'include'
+})
+.then(response => {
+  fetch('https://x-3pc.onrender.com/get-3pc.json', {
+    method: 'GET',
+    credentials: 'include'
+  })
+  .then(response => response.json())
+  .then(json => {
+    console.log('3PCs are enabled')
+    return true
+  }).catch(err => {
+    console.log('3PCs are blocked');
+    return false
+  });
+});
 }
 
 

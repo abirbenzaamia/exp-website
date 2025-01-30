@@ -1,17 +1,11 @@
 
 
-import {setCookie} from '../utils/utils'
+import {set3pc} from '../utils/utils'
 
 export default function ActivateFlagC1() {
 
     const handleSubmit = async e => {
-        
-      try{
-        setCookie("OPT_OUT", 1, 7)
-      }
-      catch{
-        alert('You did not activate the flag as mentioned')
-      }
+    
       
       };
     
