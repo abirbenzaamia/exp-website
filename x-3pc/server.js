@@ -2,6 +2,8 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+
 
 const app = express();
 const PORT = 5001;
@@ -34,10 +36,14 @@ const corsOptions = {
   },
   optionsSuccessStatus: 200,
 };
+
+
 // cors middleware
+
+//app.use(cookieParser)
 app.use(credentials);
 app.use(cors(corsOptions));
-
+app.use(cookieParser)
 
 // Route to set a cookie
 app.get("/set-3pc.html", (req, res) => {
@@ -49,6 +55,31 @@ app.get("/set-3pc.html", (req, res) => {
   });
 
   res.send("Third-party cookie set successfully.");
+});
+
+// Set a third-party cookie with SameSite=None and Secure attributes
+app.get("/set-3pc.json", (req, res) => {
+  const cookieValue = Date.now();
+  res.cookie("3pc", cookieValue, {
+    path: "/",
+    sameSite: "None",
+    secure: true,
+  });
+  res.json({ "3pc": cookieValue });
+});
+
+// Get the third-party cookie value
+app.get("/get-3pc.json", (req, res) => {
+  //const cookieValue = document.cookie["3pc"];
+  const cookies = req.headers.cookie;
+  console.log(cookies)
+  const cookieValue = cookies['3pc']
+
+  if (cookieValue) {
+    res.json({ "3pc": cookieValue });
+  } else {
+    res.send("No third-party cookie found.");
+  }
 });
 
 
