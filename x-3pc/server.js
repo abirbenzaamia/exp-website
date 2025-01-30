@@ -10,6 +10,7 @@ const PORT = 5001;
 
 const allowedOrigins = [
   "https://www.greensandbox.fr",
+  "https://greensandbox.fr/",
   "http://localhost:62886",
   "http://localhost:5001",
   "http://localhost:3000"
