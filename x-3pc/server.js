@@ -77,7 +77,7 @@ app.get("/get-3pc.json", (req, res) => {
   if (cookieValue) {
     res.json({ "3pc": cookieValue });
   } else {
-    res.send("No third-party cookie found.");
+    res.json({});
   }
 });
 
