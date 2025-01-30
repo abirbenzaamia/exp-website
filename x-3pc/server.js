@@ -2,8 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
-
+const cookieParser = require('cookie-parser')
 
 const app = express();
 const PORT = 5001;
@@ -11,7 +10,7 @@ const PORT = 5001;
 
 const allowedOrigins = [
   "https://www.greensandbox.fr",
-  "http://localhost:60404",
+  "http://localhost:62886",
   "http://localhost:5001"
 ];
 
@@ -38,12 +37,12 @@ const corsOptions = {
 };
 
 
-// cors middleware
+// // cors middleware
 
 //app.use(cookieParser)
 app.use(credentials);
 app.use(cors(corsOptions));
-app.use(cookieParser)
+app.use(cookieParser())
 
 // Route to set a cookie
 app.get("/set-3pc.html", (req, res) => {
@@ -59,7 +58,7 @@ app.get("/set-3pc.html", (req, res) => {
 
 // Set a third-party cookie with SameSite=None and Secure attributes
 app.get("/set-3pc.json", (req, res) => {
-  const cookieValue = Date.now();
+  const cookieValue = Date.now().toString() ;
   res.cookie("3pc", cookieValue, {
     path: "/",
     sameSite: "None",
@@ -71,7 +70,7 @@ app.get("/set-3pc.json", (req, res) => {
 // Get the third-party cookie value
 app.get("/get-3pc.json", (req, res) => {
   //const cookieValue = document.cookie["3pc"];
-  const cookies = req.headers.cookie;
+  const cookies = req.cookies;
   console.log(cookies)
   const cookieValue = cookies['3pc']
 
@@ -83,47 +82,7 @@ app.get("/get-3pc.json", (req, res) => {
 });
 
 
-// // Send json file
-// app.get('/get-3pc.json', (req, res) => {
-//   const filePath = path.join(__dirname, 'get-3pc.json'); 
-
-//   fs.readFile(filePath, 'utf8', (err, data) => {
-//     if (err) {
-//       console.error('Error reading the JSON file', err);
-//       res.status(500).send('Server Error');
-//       return;
-//     }
-    
-//     try {
-//       const jsonData = JSON.parse(data);
-//       res.json(jsonData); // Send parsed JSON as response
-//     } catch (error) {
-//       res.status(500).send('Invalid JSON format');
-//     }
-//   });
-// });
-
-// // Send html file
-// app.get('/set-3pc.html', (req, res) => {
-//   const filePath = path.join(__dirname, 'set-3pc.html'); 
-
-//   fs.readFile(filePath, 'utf8', (err, data) => {
-//     if (err) {
-//       console.error('Error reading the JSON file', err);
-//       res.status(500).send('Server Error');
-//       return;
-//     }
-    
-//     try {
-//       const jsonData = JSON.parse(data);
-//       res.json(jsonData); // Send parsed JSON as response
-//     } catch (error) {
-//       res.status(500).send('Invalid JSON format');
-//     }
-//   });
-// });
-
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
 
 app.get('/', async (req, res) => {
