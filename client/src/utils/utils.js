@@ -99,8 +99,17 @@ export const get3pc = async () =>  {
   })
   .then(response => response.json())
   .then(json => {
-    console.log('3PCs are enabled')
-    return true
+    document.querySelector('.set-3pc').textContent = ('3pc' in json) ?  '[ENABLED]' : '[BLOCKED]';
+    document.querySelector('.set-3pc').classList.add(('3pc' in json) ?  'enabled' : 'disabled');
+    if ('3pc' in json){
+      // the user should disactivate 3pcs
+      //alert('cookies enbaled')
+      return true
+    } else {
+      // The user pass 
+     //alert('cookies blocked')
+     return false
+    } 
   }).catch(err => {
     console.log('3PCs are blocked');
     return false
