@@ -68,104 +68,22 @@ export const detectAdBlock = async () => {
 
 // Collect IP Adress 
 
-
-// Set Cookie 
-
-export const set3pc = async () => {
-    // Detect ad blocker using a bait URL
-    fetch("https://x-3pc.onrender.com/set-3pc.html", {
-      method: "GET",
-    })
-      .then(res => {
-        //console.log(res);
-        return true;
-      })
-      .catch(err => {
-        console.log(err);
-      return false;
-      });
-}
-
-export const get3pc = async () =>  {
- // Try setting a cross-site cookie
- fetch('https://x-3pc.onrender.com/get-3pc.json', {
-  method: 'GET',
-  credentials: 'include'
-})
-.then(response => {
-  fetch('https://x-3pc.onrender.com/get-3pc.json', {
-    method: 'GET',
-    credentials: 'include'
-  })
-  .then(response => response.json())
-  .then(json => {
-    document.querySelector('.set-3pc').textContent = ('3pc' in json) ?  '[ENABLED]' : '[BLOCKED]';
-    document.querySelector('.set-3pc').classList.add(('3pc' in json) ?  'enabled' : 'disabled');
-    if ('3pc' in json){
-      // the user should disactivate 3pcs
-      //alert('cookies enbaled')
-      return true
-    } else {
-      // The user pass 
-     //alert('cookies blocked')
-     return false
-    } 
-  }).catch(err => {
-    console.log('3PCs are blocked');
-    return false
-  });
-});
-}
-
-
-//const ipinfo = require("ipinfo");
-
-// const getDetails = async (ip = null) => {
-//   const token = "your_access_token"; // Replace with your IPinfo access token
-//   try {
-//     const details = await new Promise((resolve, reject) => {
-//       ipinfo(ip, token, (err, cDetails) => {
-//         if (err) {
-//           reject(err);
-//         } else {
-//           resolve(cDetails);
-//         }
-//       });
-//     });
-
-//     console.log("IP Details:", details);
-//     return details;
-//   } catch (error) {
-//     console.error("Error fetching IP details:", error);
-//   }
-// };
-
-// // Fetch details for the current user's IP
-// getDetails();
-
-// Optionally, fetch details for a specific IP address
-// getDetails("8.8.8.8");
-
-
-// Get ip adress 
-
 export const getIp = async () => {
 
-try {
-  // Use a public IP lookup API
-  const response = await fetch("https://api.ipify.org?format=json");
-  const data = await response.json();
-  console.log(data)
-  return data;
-
-} catch (err) {
-  console.error(err);
-  return 0;
-}
-
-}
-
-
+  try {
+    // Use a public IP lookup API
+    const response = await fetch("https://api.ipify.org?format=json");
+    const data = await response.json();
+    console.log(data)
+    return data;
+  
+  } catch (err) {
+    console.error(err);
+    return 0;
+  }
+  
+  }
+  
 
 // Get Prolific IDby name
 
@@ -181,6 +99,65 @@ export const getProlificId = () => {
   }
 
 }
+
+
+
+export const detectTpc = async () => {
+  fetch('https://x-3pc.onrender.com/get-3pc.json', {
+    method: 'GET',
+    credentials: 'include'
+  })
+  .then(response => {
+    fetch('https://x-3pc.onrender.com/get-3pc.json', {
+      method: 'GET',
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(json => {
+      if ('3pc' in json){
+        // the user should disactivate
+        return false
+      } else {
+        // The user pass 
+        return true
+      } 
+    }).catch(err => {
+      console.log(err);
+      //return false
+    });
+  });
+}
+
+
+// export const detectVpn = async (ip)=> {
+//     const apiKey = 'your_api_key_here'; // Replace with your VPNAPI.io API key
+//     const url = `https://vpnapi.io/api/${ip}?key=${apiKey}`;
+  
+//     try {
+//       const response = await fetch(url);
+//       const data = await response.json();
+  
+//       const vpnDetect = data.security?.vpn || false;
+//       const proxy = data.security?.proxy || false;
+//       const tor = data.security?.tor || false;
+  
+//       console.log(`VPN: ${vpnDetect}, Proxy: ${proxy}, Tor: ${tor}`);
+  
+//       if (vpnDetect || proxy || tor) {
+//         alert("VPN, Proxy, or Tor usage detected.");
+//       } else {
+//         alert("No VPN, Proxy, or Tor detected.");
+//       }
+//     } catch (error) {
+//       console.error("Error detecting VPN:", error);
+//     }
+//   }
+  
+
+
+
+
+
 
 
 

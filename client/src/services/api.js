@@ -5,6 +5,7 @@ console.log(URL_ROOT)
 
 export const Services = {
     PARTICIPANT_URL: URL_ROOT+'/participant',
+    TESTING_GROUP_URL: URL_ROOT+'/testing_group',
 }
 
 // export const CrudService = {

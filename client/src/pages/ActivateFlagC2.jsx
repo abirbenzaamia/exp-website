@@ -2,18 +2,12 @@
 import { useEffect } from "react";
 
 
-import {get3pc, set3pc} from '../utils/utils'
 
 //import test-enabled from '../../public/assets/test-enbaled-flag.png'
 
 
 export default function ActivateFlagC2() {
 
-  useEffect(() => {
-    // Load the gtag script
-  const setCookie = set3pc()
-  console.log(setCookie)
-  }, []);
 
 // The stage one is dedicated for surevey repsonse for the Treatment group : Privacy Sandbox
  const handleSubmit = async e => {

@@ -12,19 +12,19 @@ export const getParticipantByIdService = async (id) => {
 };
 
 
-export const createParticipantService = async (prolific_id, ip, user_agent, age, gender, education) => {
+export const createParticipantService = async (prolific_id, ip, user_agent, vpn, tpc_blocked,  age, gender, education) => {
   const result = await pool.query(
-    "INSERT INTO participants (prolific_id, ip, user_agent, age, gender, education) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-    [prolific_id, ip, user_agent, age, gender, education]
+    "INSERT INTO participants (prolific_id, ip, user_agent, vpn, tpc_blocked, age, gender, education) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+    [prolific_id, ip, user_agent, vpn, tpc_blocked, age, gender, education]
   );
   return result.rows[0];
 };
 
 
-export const updateParticipantService = async (id, prolific_id, ip, user_agent, age, gender, education) => {
+export const updateParticipantService = async (id, prolific_id, ip, user_agent, vpn, tpc_blocked, age, gender, education) => {
   const result = await pool.query(
-    "UPDATE users SET prolific_id=$1, ip=$2, user_agent=$3, age=$4, gender=$5, education=$6 WHERE id=$7 RETURNING *",
-    [prolific_id, ip, user_agent, age, gender, education, id]
+    "UPDATE participants SET prolific_id=$1, ip=$2, user_agent=$3, vpn=$4, tpc_blocked=$5, age=$6, gender=$7, education=$8 WHERE id=$9 RETURNING *",
+    [prolific_id, ip, user_agent, vpn, tpc_blocked, age, gender, education, id]
   );
   return result.rows[0];
 };

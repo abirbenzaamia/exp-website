@@ -20,10 +20,6 @@ function Home() {
       />
     </div>
         <div className="min-h-screen bg-gray-50 items-center justify-center p-20 text-center ">
-      <AdBlockDetector/>
-      <BrowserTypeDetector/>
-      <DeviceDetector/>
-      <PrivacyNotice/>
       <StartForm/>
 
       </div>

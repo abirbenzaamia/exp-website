@@ -23,7 +23,7 @@ export const createResponseService = async (prolific_id, test_group, publisher, 
 
 export const updateResponseService = async (id, prolific_id, test_group, publisher, ad_url, r1, r2, r3, r4) => {
   const result = await pool.query(
-    "UPDATE users SET prolific_id=$1, test_group=$2, publisher=$3, ad_url=$4, r1=$5, r2=$6, r3=$7, r4=$8 WHERE id=$9 RETURNING *",
+    "UPDATE responses SET prolific_id=$1, test_group=$2, publisher=$3, ad_url=$4, r1=$5, r2=$6, r3=$7, r4=$8 WHERE id=$9 RETURNING *",
     [prolific_id, test_group, publisher, ad_url, r1, r2, r3, r4, id]
   );
   return result.rows[0];

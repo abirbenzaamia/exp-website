@@ -2,14 +2,15 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import pool from "./src/config/db.js";
-import participantRoutes from './src/routes/participantRoutes.js'
 import errorHandling from "./src/middlewares/errorHandler.js";
-import createParticipantTable from "./src/data/createParticipantTable.js";
 
+//Routes
 import responseRoutes from './src/routes/responseRoutes.js'
-import createResponseTable from "./src/data/createResponseTable.js";
-import corsOptions from "./src/config/corsOptions.js";
+import participantRoutes from './src/routes/participantRoutes.js'
+import testingGroupRoutes from './src/routes/testingGroupRoutes.js'
 
+import corsOptions from "./src/config/corsOptions.js";
+import createTables from "./src/data/createTables.js";
 
 dotenv.config();
 
@@ -33,14 +34,15 @@ app.use(cors(corsOptions));
 // Routes 
 app.use("/api", participantRoutes)
 app.use("/api", responseRoutes)
+app.use("/api", testingGroupRoutes)
+
 
 
 // Error handling middleware
 app.use(errorHandling)
 
 //Create table before starting server
-createParticipantTable();
-createResponseTable();
+createTables();
 
 // Testing POSTGRES Connection
 app.get('/', async (req, res) => {

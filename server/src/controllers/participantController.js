@@ -17,9 +17,9 @@ import {
   };
   
   export const createParticipant = async (req, res, next) => {
-    const {prolific_id, ip, user_agent, age, gender, education } = req.body;
+    const {prolific_id, ip, user_agent, vpn, tpc_blocked, age, gender, education } = req.body;
     try {
-      const newParticipant = await createParticipantService(prolific_id, ip, user_agent, age, gender, education);
+      const newParticipant = await createParticipantService(prolific_id, ip, user_agent, vpn, tpc_blocked, age, gender, education);
       handleResponse(res, 201, "Participant created successfully", newParticipant);
     } catch (err) {
       next(err);
@@ -46,9 +46,9 @@ import {
   };
   
   export const updateParticipant = async (req, res, next) => {
-    const { prolific_id, ip, user_agent, age, gender, education } = req.body;
+    const { prolific_id, ip, user_agent, vpn, tpc_blocked, age, gender, education } = req.body;
     try {
-      const updatedParticipant = await updateParticipantService(req.params.id, prolific_id, ip, user_agent, age, gender, education);
+      const updatedParticipant = await updateParticipantService(req.params.id, prolific_id, ip, user_agent, vpn, tpc_blocked, age, gender, education);
       if (!updatedParticipant) return handleResponse(res, 404, "Participant not found");
       handleResponse(res, 200, "Participant updated successfully", updatedParticipant);
     } catch (err) {

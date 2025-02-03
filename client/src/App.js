@@ -30,6 +30,10 @@ const urls =['https://www.lemonde.fr/', 'https://www.lachainemeteo.com/', 'https
   return (
 
     <BrowserRouter>
+    <AdBlockDetector/>
+      <BrowserTypeDetector/>
+      <DeviceDetector/>
+      <PrivacyNotice/>
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
