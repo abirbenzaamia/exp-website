@@ -9,7 +9,7 @@ import SurveyComponent from './components/Stage1.jsx'
 
 //pages 
 import Home from './pages/Home.jsx';
-import Survey1 from './pages/Survey1.jsx'
+import Survey from './pages/Survey.jsx'
 import ActivateFlagTreatment from './pages/ActivateFlagTreatment.jsx';
 import ActivateFlagC1 from './pages/ActivateFlagC1.jsx';
 import ActivateFlagC2 from './pages/ActivateFlagC2.jsx';
@@ -37,13 +37,12 @@ const urls =['https://www.lemonde.fr/', 'https://www.lachainemeteo.com/', 'https
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
-          <Route path="survey1" element={<Survey1 />} />
           <Route path="treatment" element={<ActivateFlagTreatment />} />
           <Route path="control1" element={<ActivateFlagC1 />} />
           <Route path="control2" element={<ActivateFlagC2/>} />
-          <Route path="treatment/survey" element={<Survey1 />} />
-          <Route path="treatment/survey" element={<Survey1 />} />
-          <Route path="treatment/survey" element={<Survey1 />} />
+          <Route path="treatment/survey" element={<Survey />} />
+          <Route path="control1/survey" element={<Survey />} />
+          <Route path="control2/survey" element={<Survey />} />
         </Route>
       </Routes>
     </BrowserRouter>
