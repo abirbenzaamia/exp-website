@@ -30,7 +30,7 @@ export default function ActivateFlagC1() {
       if ('3pc' in json){
         // the user pass
         console.log('passed, cookie not blocked');
-        navigate("./survey");
+        navigate("./survey1");
       } else {
         //alert('error');
         console.log('cookies blocked')

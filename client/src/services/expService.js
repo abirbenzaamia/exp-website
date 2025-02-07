@@ -31,3 +31,21 @@ export function createTestingGroup(prolific_id ) {
 
 
 
+export function createResponse(prolific_id, test_group, publisher, ad_url, r1, r2, r3, r4) {
+
+    const data = {
+        "prolific_id" : prolific_id, 
+        "test_group" : test_group, 
+        "publisher" : publisher, 
+        "ad_url" : ad_url, 
+        "r1" : r1, 
+        "r2" : r2, 
+        "r3" : r3, 
+        "r4" : r4
+    };
+    console.log(data)
+    return Axios.post(Services.RESPONSE_URL, data)
+        
+}
+
+

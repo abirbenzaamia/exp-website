@@ -60,15 +60,6 @@ const getValue = async () => {
 
 getValue()
 
-//assign to testing group 
-const assigntestGroup = async () => {
-  // Send data to the backend 
-  const testing_group = await createParticipant(
-    profilicId
-  ).catch(console.error);
-
-}
-
 
 
 const handleGender = (event) => {
@@ -150,7 +141,7 @@ const handleSubmit = async e => {
             <label htmlFor="gender" className="block text-xl font-semibold text-gray-900">
                 Your gender
               </label>
-            <div className="grid gap-4 grid-cols-2 mt-5">
+            <div className="grid gap-4 grid-cols-3 mt-5">
             <div className="flex items-center gap-x-3">
                   <input
                     required
@@ -174,6 +165,19 @@ const handleSubmit = async e => {
                   />
                   <label className="block text-lg font-medium text-gray-900">
                     Female
+                  </label>
+                </div>
+                <div className="flex items-center gap-x-3">
+                  <input
+                    required
+                    name="gender"
+                    type="radio"
+                    value="2"
+                    onChange={handleGender}
+                    className="relative size-5 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden [&:not(:checked)]:before:hidden"
+                  />
+                  <label className="block text-lg font-medium text-gray-900">
+                    Prefer to not say
                   </label>
                 </div>
            </div>

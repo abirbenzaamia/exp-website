@@ -36,7 +36,7 @@ export default function ActivateFlagTreatment() {
         SetAlertShow(true)
       } else {
         console.log('cookies blocked')
-        navigate("./survey");
+        navigate("./survey1");
       } 
     }).catch(err => {
       console.log(err);
