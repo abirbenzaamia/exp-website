@@ -62,6 +62,7 @@ getValue()
 
 
 
+
 const handleGender = (event) => {
   setGender(event.target.value); // Update state when a radio is selected
 };
@@ -91,24 +92,26 @@ const handleSubmit = async e => {
   // Send data to the backend 
   const testing_group_response = await createTestingGroup(
     profilicId
-  ).catch(console.error);
+  ).then((testing_group_response) => {
+    localStorage.setItem("testing_group",testing_group_response.data.data.test_group);
+    switch (testing_group_response.data.data.test_group) {
+      case 0:
+        navigate("/treatment");
+        break;
+  
+      case 1:
+        navigate("/control1");
+        break;
+  
+      case 2:
+        navigate("/control2");
+        break;
+      default:
+        break;
+    }
+  })
+  .catch(console.error);
   //onece the user assigned, he will be redirected to his according survey page
-  localStorage.setItem("testing_group",testing_group_response.data.data.test_group);
-  switch (testing_group_response.data.data.test_group) {
-    case 0:
-      navigate("/treatment");
-      break;
-
-    case 1:
-      navigate("/control1");
-      break;
-
-    case 2:
-      navigate("/control2");
-      break;
-    default:
-      break;
-  }
 
 };
 
