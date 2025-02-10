@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { setPublisherWebsites } from "../utils/utils";
 import { useNavigate, useLocation } from "react-router-dom";
 import {createResponse} from '../services/expService'
-
+import Completed from "./Completed";
 
 
 const SurveyComponent = (step) => {
@@ -25,7 +25,7 @@ const SurveyComponent = (step) => {
     let completion_code = ""
     
 
-   console.log(testing_group)
+  //  console.log(testing_group)
    switch (testing_group) {
     case 0:
       completion_code = "C1IG27I1";
@@ -44,7 +44,7 @@ const SurveyComponent = (step) => {
    }
   
 
-   console.log(completion_code)
+  //  console.log(completion_code)
     const handleAdRelevance = (event) => {
       setAdRelevance(event.target.value);
     };
@@ -339,29 +339,28 @@ const SurveyComponent = (step) => {
         <div className="max-w-3xl m-5 p-6 pt-0 items-center justify-center ">
 
 
-        {complete && (
-        <p className="text-lg text-gray-700">
-          You complete code is <strong> {completion_code} </strong>
-        </p>
-      )}
-
-
-        <button
-        className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
-        type="submit"
-        //onClick={handleSubmit}
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          backgroundColor: "#007BFF",
-          color: "#fff",
-          border: "none",
-          borderRadius: "4px",
-          cursor: "pointer",
-        }}
-      >
-        {step.step <  3 ? "Next" : "Submit"}
-      </button>
+        {
+          complete
+          ? <Completed code={completion_code}/>
+          : <button
+          className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
+          type="submit"
+          //onClick={handleSubmit}
+          style={{
+            marginTop: "20px",
+            padding: "10px 20px",
+            backgroundColor: "#007BFF",
+            color: "#fff",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+          }}
+        >
+          {step.step <  3 ? "Next" : "Submit"}
+        </button>
+        }
+        
+      
       </div>
       </form>
 
