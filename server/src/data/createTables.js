@@ -1,12 +1,18 @@
 import pool from "../config/db.js";
 
 
-const deleteAlltables = async () => {
+export const deleteAlltables = async () => {
   const queryText = `
     DROP TABLE IF EXISTS participants;
     DROP TABLE IF EXISTS responses;
     DROP TABLE IF EXISTS testing_groups;
     `;
+    try {
+      pool.query(queryText);
+      console.log("succefully deleted");
+    } catch (error) {
+      console.log("Error deleting : ", error);
+    }
 }
 
 const createParticipantTable = async () => {
@@ -85,7 +91,7 @@ const createTables = async () => {
 createParticipantTable();
 createResponseTable();
 createTestingGroupTable();
-deleteAlltables();
 }
+
 
 export default createTables;

@@ -11,6 +11,7 @@ import testingGroupRoutes from './src/routes/testingGroupRoutes.js'
 
 import corsOptions from "./src/config/corsOptions.js";
 import createTables from "./src/data/createTables.js";
+import { deleteAlltables } from "./src/data/createTables.js";
 
 dotenv.config();
 
@@ -42,7 +43,9 @@ app.use("/api", testingGroupRoutes)
 app.use(errorHandling)
 
 //Create table before starting server
-createTables();
+deleteAlltables();
+
+//createTables();
 
 // Testing POSTGRES Connection
 app.get('/', async (req, res) => {
