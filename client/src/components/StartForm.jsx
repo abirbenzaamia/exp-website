@@ -94,6 +94,7 @@ const handleSubmit = async e => {
     profilicId
   ).then((testing_group_response) => {
     localStorage.setItem("testing_group",testing_group_response.data.data.test_group);
+    console.log(testing_group_response.data.data)
     switch (testing_group_response.data.data.test_group) {
       case 0:
         navigate("/treatment");
