@@ -47,7 +47,7 @@ const createResponseTable = async () => {
       prolific_id VARCHAR(100) NOT NULL,
       test_group VARCHAR(100) NOT NULL,
       publisher VARCHAR(100) NOT NULL,
-      ad_url VARCHAR(2000) NOT NULL,
+      ad_url VARCHAR(5000) NOT NULL,
       r1 VARCHAR(100) NOT NULL,
       r2 VARCHAR(100) NOT NULL,
       r3 VARCHAR(100) NOT NULL,
