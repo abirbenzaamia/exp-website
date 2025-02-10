@@ -60,7 +60,7 @@ const AdBlockDetector = () => {
                   </DialogTitle>
                   <div>
                     <p className="text-sm text-gray-500">
-                    You are currently using an <strong>Ad Blocker</strong>. Please consider desactivating it <strong>desactivating it</strong> and reload the page to continue to the study !
+                    You are currently using an <strong>Ad Blocker</strong>. Please consider deactivating it <strong>desactivating it</strong> and reload the page to continue to the study !
                     </p>
                   </div>
                 </div>
