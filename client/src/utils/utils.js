@@ -193,7 +193,7 @@ export const getIp = async () => {
     // Use a public IP lookup API
     const response = await fetch("https://api.ipify.org?format=json");
     const data = await response.json();
-    console.log(data)
+    //console.log(data)
     return data;
   
   } catch (err) {

@@ -43,9 +43,9 @@ app.use("/api", testingGroupRoutes)
 app.use(errorHandling)
 
 //Create table before starting server
-//deleteAlltables();
+deleteAlltables();
 
-createTables();
+//createTables();
 
 // Testing POSTGRES Connection
 app.get('/', async (req, res) => {
