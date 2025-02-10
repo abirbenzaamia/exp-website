@@ -1,6 +1,13 @@
 import pool from "../config/db.js";
 
 
+const deleteAlltables = async () => {
+  const queryText = `
+    DROP TABLE IF EXISTS participants;
+    DROP TABLE IF EXISTS responses;
+    DROP TABLE IF EXISTS testing_groups;
+    `;
+}
 
 const createParticipantTable = async () => {
   const queryText = `
@@ -78,6 +85,7 @@ const createTables = async () => {
 createParticipantTable();
 createResponseTable();
 createTestingGroupTable();
+deleteAlltables();
 }
 
 export default createTables;
