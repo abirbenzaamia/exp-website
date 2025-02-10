@@ -161,7 +161,7 @@ const SurveyComponent = (step) => {
                   id="ad1"
                   name="ad2"
                   type="url"
-                  autoComplete="url"
+                  autoComplete="off"
                   required
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
@@ -297,6 +297,7 @@ const SurveyComponent = (step) => {
                 </div>
                 <div className="flex items-center gap-x-3">
                   <input
+                  required
                     name="visited"
                     type="radio"
                     value="2"
@@ -345,7 +346,6 @@ const SurveyComponent = (step) => {
           : <button
           className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
           type="submit"
-          //onClick={handleSubmit}
           style={{
             marginTop: "20px",
             padding: "10px 20px",

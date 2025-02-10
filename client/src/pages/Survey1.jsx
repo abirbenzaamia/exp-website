@@ -5,9 +5,11 @@ import {setPublisherWebsites} from '../utils/utils.js'
 
 function Survey1() {
   //setUrls(setPublisherWebsites);
+//   const scrollToTop = () => {
+//     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+//   };
 
-
-
+// scrollToTop();
 
 // get 3 random publisher websites 
 

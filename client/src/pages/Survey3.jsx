@@ -5,7 +5,11 @@ import SurveyComponent from '../components/SurveyComponent.jsx'
 function Survey3() {
   //setUrls(setPublisherWebsites);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  };
 
+scrollToTop();
 
 
 // get 3 random publisher websites 
