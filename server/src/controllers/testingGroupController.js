@@ -76,7 +76,7 @@ const groupMutex = new Mutex();
         //console.log(group)
         let groupLength = group && Object.keys(group).length || 0;
         //onsole.log(groupLength)
-        if (groupLength <= assigned_users.length * (1/3)) assign = true
+        if (groupLength/3 <= assigned_users.length * (1/3)) assign = true
         
       } while (!assign);
         // we need control2 group 

@@ -3,6 +3,7 @@ import { setPublisherWebsites } from "../utils/utils";
 import { useNavigate, useLocation } from "react-router-dom";
 import {createResponse} from '../services/expService'
 import Completed from "./Completed";
+import ResponseError from "./ResponseError";
 
 
 const SurveyComponent = (step) => {
@@ -12,14 +13,20 @@ const SurveyComponent = (step) => {
 
 
   const [complete, setComplete] = useState(false);
+  const [responseError, setResponseError] = useState("");
 
     const [url, setUrl] = useState(setPublisherWebsites);
     const prolific_id = localStorage.getItem("prolific_id");
     const [adUrl, setAdUrl] = useState();
-    const [adRelevance, setAdRelevance] = useState(0);
-    const [privacy, setPrivacy] = useState(0);
-    const [purchaseIntent, setPurchaseIntent] = useState(0);
+    const [adRelevance, setAdRelevance] = useState(1);
+    const [privacy, setPrivacy] = useState(1);
+    const [purchaseIntent, setPurchaseIntent] = useState(1);
     const [visited, setVisited] = useState();
+
+
+    const [relevancyInteraction, setRelevancyInteraction] = useState(false)
+    const [intrusiveInteraction, setIntrusiveInteraction] = useState(false)
+    const [purchaseInteraction, setPurchaseInteraction] = useState(false)
    
     const testing_group = parseInt(localStorage.getItem("testing_group"))
     let completion_code = ""
@@ -59,18 +66,34 @@ const SurveyComponent = (step) => {
   
     const handlePurchase = (event) => {
       setPurchaseIntent(event.target.value);
+      console.log('New value:', event.target.value)
     };
     const handleAdUrl = (event) => {
       setAdUrl(event.target.value);
     };
-  
-  
-    const handleSubmit = async (e) => {
-      // Handle the submission of the survey data
-      e.preventDefault();
 
-      // Send anyway to the backend
-      // prolific_id, test_group, publisher, ad_url, r1, r2, r3, r4
+    const handleClickRelevancy = () => {
+      setRelevancyInteraction(true)
+    }
+
+    const handleClickIntrusive = () => {
+      setIntrusiveInteraction(true)
+    }
+
+    const handleClickPurchase = () => {
+      setPurchaseInteraction(true)
+    }
+  
+ 
+
+    const handleSubmit = async (e) => {
+      // Prevent default form submission behavior
+      //setResponseError(false)
+      e.preventDefault();
+      // Reset response error state before validation
+      // Log the current state of responseError for debugging    
+      const basePath = location.pathname.split('/').slice(0, -1).join('/');
+    
       console.log(
         prolific_id,
         testing_group,
@@ -81,42 +104,49 @@ const SurveyComponent = (step) => {
         purchaseIntent,
         visited
       );
-
-      const create_participant_response = await createResponse(
-        prolific_id,
-        testing_group,
-        url[0],
-        adUrl,
-        adRelevance,
-        privacy,
-        purchaseIntent,
-        visited
-      ).catch(console.error);
-
-
-
-      const basePath = location.pathname.split('/').slice(0, -1).join('/');
-      switch (step.step ) {
-        case 1:
-          navigate(`${basePath}/survey2`);
-          break;
-
-        case 2:
-          navigate(`${basePath}/survey3`);
-          break;
-        
-        case 3:
-        // Show the completion code 
-          setComplete(true);
-          break;
-      
-        default:
-          break;
+    
+      // Check if all required responses are provided
+      if (relevancyInteraction && intrusiveInteraction  && purchaseInteraction ) {
+        try {
+          const create_participant_response = await createResponse(
+            prolific_id,
+            testing_group,
+            url[0],
+            adUrl,
+            adRelevance,
+            privacy,
+            purchaseIntent,
+            visited
+          );
+    
+          // Handle navigation based on the current survey step
+          switch (step.step) {
+            case 1:
+              navigate(`${basePath}/survey2`);
+              break;
+            case 2:
+              navigate(`${basePath}/survey3`);
+              break;
+            case 3:
+              setComplete(true); // Show the completion code
+              break;
+            default:
+              break;
+          }
+        } catch (error) {
+          console.error("Error creating participant response:", error);
+        }
+      } else {
+        // setResponseError(true);
+        setResponseError(true);
+        // Handle error when responses are missing
+        console.log(responseError);
       }
-     
+    };
+
+    
 
 
-      };
   // Survey data (questions for each step)
 
 
@@ -132,7 +162,11 @@ const SurveyComponent = (step) => {
   return (
     <div className="text-center">
         <div className="container mx-auto w-1/2 text-left">
-
+        {
+          responseError 
+          ? <ResponseError responseError={responseError} setResponseError={setResponseError}/>
+          : <div></div>
+        }
       <form onSubmit={handleSubmit}>
         {/* Survey page  */}
 
@@ -187,8 +221,10 @@ const SurveyComponent = (step) => {
      min="1"
      max="5" 
      step="1"
+     required
      value={adRelevance}
      onChange={handleAdRelevance}
+     onClick={handleClickRelevancy}
      className='w-full h-1 bg-gray-300 rounded-xl appearance-none cursor-pointer focus:outline-none'/>
 
     <ul className="flex justify-between w-full px-[20px]">
@@ -223,6 +259,7 @@ const SurveyComponent = (step) => {
      step="1"
      value={privacy}
      onChange={handlePrivacy}
+     onClick={handleClickIntrusive}
      className='w-full h-1 bg-gray-300 rounded-xl appearance-none cursor-pointer focus:outline-none'/>
 
     <ul className="flex justify-between w-full px-[20px]">
@@ -245,7 +282,7 @@ const SurveyComponent = (step) => {
 
  <div className="mb-5 mt-5">
           <label className="block text-lg font-medium text-gray-700 mb-2">
-          How willing are you to buy this pruduct or use this service from this Advertiser ?
+          How likely are you to purchase this product or use this service from this advertiser?
 
           </label>
           <div className="flex flex-col space-y-2 p-2 pb-20 w-full border-gray-900/10">
@@ -256,14 +293,15 @@ const SurveyComponent = (step) => {
      step="1"
      value={purchaseIntent}
      onChange={handlePurchase}
+     onClick={handleClickPurchase}
      className='w-full h-1 bg-gray-300 rounded-xl appearance-none cursor-pointer focus:outline-none'/>
 
     <ul className="flex justify-between w-full px-[20px]">
-        <li className="flex text-bold justify-center relative"><span className="absolute">Strongly Disagree</span></li>
-        <li className="flex justify-center relative"><span className="absolute">Disagree</span></li>
+        <li className="flex text-bold justify-center relative"><span className="absolute">Very Unlikely</span></li>
+        <li className="flex justify-center relative"><span className="absolute">Unlikely</span></li>
         <li className="flex justify-center relative"><span className="absolute">Neither</span></li>
-        <li className="flex justify-center relative"><span className="absolute">Agree</span></li>
-        <li className="flex justify-center relative"><span className="absolute">Strongly Agree</span></li>
+        <li className="flex justify-center relative"><span className="absolute">Likely</span></li>
+        <li className="flex justify-center relative"><span className="absolute">Very Likely</span></li>
     </ul>
 </div>
         </div>
@@ -338,7 +376,8 @@ const SurveyComponent = (step) => {
     </div>
 
         <div className="max-w-3xl m-5 p-6 pt-0 items-center justify-center ">
-
+      
+       
 
         {
           complete

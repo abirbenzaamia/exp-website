@@ -19,7 +19,8 @@ export const getTestingGroupByProlificIdService = async (prolific_id) => {
 
 
 export const getTestingGroupsService = async (test_group) => {
-  const result = await pool.query("SELECT * FROM testing_groups where test_group = $1", [test_group]);
+  // Get only testing_groups where there is a corresponding response 
+  const result = await pool.query("SELECT * FROM responses where test_group = $1 ", [test_group]);
   return result.rows;
 };
 
